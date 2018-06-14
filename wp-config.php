@@ -1,93 +1,52 @@
 <?php
-/**
- * WordPress の基本設定
- *
- * このファイルは、インストール時に wp-config.php 作成ウィザードが利用します。
- * ウィザードを介さずにこのファイルを "wp-config.php" という名前でコピーして
- * 直接編集して値を入力してもかまいません。
- *
- * このファイルは、以下の設定を含みます。
- *
- * * MySQL 設定
- * * 秘密鍵
- * * データベーステーブル接頭辞
- * * ABSPATH
- *
- * @link http://wpdocs.osdn.jp/wp-config.php_%E3%81%AE%E7%B7%A8%E9%9B%86
- *
- * @package WordPress
- */
 
-// 注意:
-// Windows の "メモ帳" でこのファイルを編集しないでください !
-// 問題なく使えるテキストエディタ
-// (http://wpdocs.osdn.jp/%E7%94%A8%E8%AA%9E%E9%9B%86#.E3.83.86.E3.82.AD.E3.82.B9.E3.83.88.E3.82.A8.E3.83.87.E3.82.A3.E3.82.BF 参照)
-// を使用し、必ず UTF-8 の BOM なし (UTF-8N) で保存してください。
+## setting　* 必記述
 
-// ** MySQL 設定 - この情報はホスティング先から入手してください。 ** //
-/** WordPress のためのデータベース名 */
-define('DB_NAME', 'database_name_here');
+	// db
+	define( 'DB_HOST',              'mysql631.db.sakura.ne.jp' );
+	define( 'DB_USER',              'blueprintdesign' );
+	define( 'DB_PASSWORD',          'bm94UGY6' );
+	define( 'DB_NAME',              'blueprintdesign_tmpl_01' );
 
-/** MySQL データベースのユーザー名 */
-define('DB_USER', 'username_here');
+## key　* 必記述
 
-/** MySQL データベースのパスワード */
-define('DB_PASSWORD', 'password_here');
+	/*
+		認証用ユニークキー　※ 下記アドレスで生成してコピペ
+		@since 2.6.0
+		https://api.wordpress.org/secret-key/1.1/salt/
+	*/
+	define('AUTH_KEY',         'O^@{pjG@xT9F%]7*ubl/#4/Z_@`*U,&mj}ysN-tRjL]l;5IhRy0AiD!FPbccFiz4');
+	define('SECURE_AUTH_KEY',  'Gf`/LM`!LaAQ+%2Gl&c|=w/)UJAIgB8sN1l/ D/jy).t<E_+LpLLxkSoWHes4LBq');
+	define('LOGGED_IN_KEY',    'Gc}tTEU+rK0N>qH|`g4}n56dgE,Y@LEi9ovH[`xveB-RN|SBy&T3M@3wp3Ua$q-.');
+	define('NONCE_KEY',        '*|-3 %o-E>Hh!F-{f$-!acjRVJkTo1<e][+nX|KGp];Sr|XjK>-9Pwa|EnSS!IqU');
+	define('AUTH_SALT',        '-icu=Z(,H1_HR@kXQGXhmV7#.z<<WTSUg8+h8q:XBAXM=BEhl$t@!R+pA7]Im/!O');
+	define('SECURE_AUTH_SALT', 'OJ2QrpoO6eHSx-CJ)~q!|-<@h}eADKvUv+ME<aHJH/^t?Lybd%*kP4V/!1TEEWFH');
+	define('LOGGED_IN_SALT',   'AtTe7J s-dc5G!}nNxOy) gS<$4M;5-+$S$6gc$9Fa*Sy&P3;9FO-yTo q9(}YB^');
+	define('NONCE_SALT',       '$*#n&t8I$2mA*nz00uEZPEG1hEHNjy,xBUFP]K2SH|GCB~pII?vO3j]hMMwoaxB1');
 
-/** MySQL のホスト名 */
-define('DB_HOST', 'localhost');
+## option
 
-/** データベースのテーブルを作成する際のデータベースの文字セット */
-define('DB_CHARSET', 'utf8');
+	// db
+	define( 'DB_CHARSET',           'utf8' );
+	define( 'DB_COLLATE',           '' );
+	// multisite
+	define( 'WP_ALLOW_MULTISITE',   false );
+	define( 'MULTISITE',            false );
+	// site
+	define( 'SUBDOMAIN_INSTALL',    false );
+	define( 'SITE_ID_CURRENT_SITE', 1 );
+	define( 'BLOG_ID_CURRENT_SITE', 1 );
 
-/** データベースの照合順序 (ほとんどの場合変更する必要はありません) */
-define('DB_COLLATE', '');
+## default　* 編集不可
 
-/**#@+
- * 認証用ユニークキー
- *
- * それぞれを異なるユニーク (一意) な文字列に変更してください。
- * {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org の秘密鍵サービス} で自動生成することもできます。
- * 後でいつでも変更して、既存のすべての cookie を無効にできます。これにより、すべてのユーザーを強制的に再ログインさせることになります。
- *
- * @since 2.6.0
- */
-define('AUTH_KEY',         'put your unique phrase here');
-define('SECURE_AUTH_KEY',  'put your unique phrase here');
-define('LOGGED_IN_KEY',    'put your unique phrase here');
-define('NONCE_KEY',        'put your unique phrase here');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
-
-/**#@-*/
-
-/**
- * WordPress データベーステーブルの接頭辞
- *
- * それぞれにユニーク (一意) な接頭辞を与えることで一つのデータベースに複数の WordPress を
- * インストールすることができます。半角英数字と下線のみを使用してください。
- */
-$table_prefix  = 'wp_';
-
-/**
- * 開発者へ: WordPress デバッグモード
- *
- * この値を true にすると、開発中に注意 (notice) を表示します。
- * テーマおよびプラグインの開発者には、その開発環境においてこの WP_DEBUG を使用することを強く推奨します。
- *
- * その他のデバッグに利用できる定数については Codex をご覧ください。
- *
- * @link http://wpdocs.osdn.jp/WordPress%E3%81%A7%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0
- */
-define('WP_DEBUG', false);
-
-/* 編集が必要なのはここまでです ! WordPress でブログをお楽しみください。 */
-
-/** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
-
-/** Sets up WordPress vars and included files. */
-require_once(ABSPATH . 'wp-settings.php');
+	// prefix
+	$table_prefix = 'wp_';
+	// lang
+	define( 'WPLANG', 'ja' );
+	// debug_mode
+	define( 'WP_DEBUG', false );
+	// run wordpress
+	if( ! defined( 'ABSPATH' ) ) {
+		define( 'ABSPATH', dirname(__FILE__) . '/' );
+	}
+	require_once(ABSPATH . 'wp-settings.php' );
